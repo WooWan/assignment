@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<530837de1fd9dbfe9bc71a972deac1f7>>
+ * @generated SignedSource<<b4a69771aa4e0a5cba8031d691c97705>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -14,12 +14,7 @@ export type SearchResultsFragment$data = {
   readonly search: {
     readonly edges: ReadonlyArray<{
       readonly node: {
-        readonly description?: string | null | undefined;
-        readonly name?: string;
-        readonly stargazers?: {
-          readonly totalCount: number;
-        };
-        readonly url?: any;
+        readonly " $fragmentSpreads": FragmentRefs<"RepositoryFragment">;
       } | null | undefined;
     } | null | undefined> | null | undefined;
   };
@@ -47,7 +42,7 @@ return {
       "name": "first"
     },
     {
-      "defaultValue": null,
+      "defaultValue": "",
       "kind": "LocalArgument",
       "name": "query"
     }
@@ -113,50 +108,9 @@ return {
               "plural": false,
               "selections": [
                 {
-                  "kind": "InlineFragment",
-                  "selections": [
-                    {
-                      "alias": null,
-                      "args": null,
-                      "kind": "ScalarField",
-                      "name": "name",
-                      "storageKey": null
-                    },
-                    {
-                      "alias": null,
-                      "args": null,
-                      "kind": "ScalarField",
-                      "name": "description",
-                      "storageKey": null
-                    },
-                    {
-                      "alias": null,
-                      "args": null,
-                      "kind": "ScalarField",
-                      "name": "url",
-                      "storageKey": null
-                    },
-                    {
-                      "alias": null,
-                      "args": null,
-                      "concreteType": "StargazerConnection",
-                      "kind": "LinkedField",
-                      "name": "stargazers",
-                      "plural": false,
-                      "selections": [
-                        {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "totalCount",
-                          "storageKey": null
-                        }
-                      ],
-                      "storageKey": null
-                    }
-                  ],
-                  "type": "Repository",
-                  "abstractKey": null
+                  "args": null,
+                  "kind": "FragmentSpread",
+                  "name": "RepositoryFragment"
                 },
                 {
                   "alias": null,
@@ -212,6 +166,6 @@ return {
 };
 })();
 
-(node as any).hash = "c736af76bdbbe5eb3803d61a1fe49c90";
+(node as any).hash = "c7a99faa9da44f3fc4024ce3ad8770d0";
 
 export default node;

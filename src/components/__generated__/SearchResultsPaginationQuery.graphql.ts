@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<bf8eda18d8c22803722f98e6da6e5a04>>
+ * @generated SignedSource<<76ae718f28d7370e39a7b82a8a59337c>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -13,7 +13,7 @@ import { FragmentRefs } from "relay-runtime";
 export type SearchResultsPaginationQuery$variables = {
   cursor?: string | null | undefined;
   first?: number | null | undefined;
-  query: string;
+  query?: string | null | undefined;
 };
 export type SearchResultsPaginationQuery$data = {
   readonly " $fragmentSpreads": FragmentRefs<"SearchResultsFragment">;
@@ -36,7 +36,7 @@ var v0 = [
     "name": "first"
   },
   {
-    "defaultValue": null,
+    "defaultValue": "",
     "kind": "LocalArgument",
     "name": "query"
   }
@@ -64,7 +64,21 @@ v3 = [
     "name": "type",
     "value": "REPOSITORY"
   }
-];
+],
+v4 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "id",
+  "storageKey": null
+},
+v5 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "name",
+  "storageKey": null
+};
 return {
   "fragment": {
     "argumentDefinitions": (v0/*: any*/),
@@ -129,13 +143,8 @@ return {
                   {
                     "kind": "InlineFragment",
                     "selections": [
-                      {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "name",
-                        "storageKey": null
-                      },
+                      (v4/*: any*/),
+                      (v5/*: any*/),
                       {
                         "alias": null,
                         "args": null,
@@ -148,6 +157,13 @@ return {
                         "args": null,
                         "kind": "ScalarField",
                         "name": "url",
+                        "storageKey": null
+                      },
+                      {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "viewerHasStarred",
                         "storageKey": null
                       },
                       {
@@ -167,6 +183,19 @@ return {
                           }
                         ],
                         "storageKey": null
+                      },
+                      {
+                        "alias": null,
+                        "args": null,
+                        "concreteType": "Language",
+                        "kind": "LinkedField",
+                        "name": "primaryLanguage",
+                        "plural": false,
+                        "selections": [
+                          (v5/*: any*/),
+                          (v4/*: any*/)
+                        ],
+                        "storageKey": null
                       }
                     ],
                     "type": "Repository",
@@ -175,13 +204,7 @@ return {
                   {
                     "kind": "InlineFragment",
                     "selections": [
-                      {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "id",
-                        "storageKey": null
-                      }
+                      (v4/*: any*/)
                     ],
                     "type": "Node",
                     "abstractKey": "__isNode"
@@ -242,16 +265,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "dd193a92dd5adb5d7f2534eeec5695e8",
+    "cacheID": "47ca51c227f65eba9bba08b46ddefd23",
     "id": null,
     "metadata": {},
     "name": "SearchResultsPaginationQuery",
     "operationKind": "query",
-    "text": "query SearchResultsPaginationQuery(\n  $cursor: String\n  $first: Int = 3\n  $query: String!\n) {\n  ...SearchResultsFragment_1BvpD0\n}\n\nfragment SearchResultsFragment_1BvpD0 on Query {\n  search(query: $query, type: REPOSITORY, first: $first, after: $cursor) {\n    edges {\n      node {\n        __typename\n        ... on Repository {\n          name\n          description\n          url\n          stargazers {\n            totalCount\n          }\n        }\n        ... on Node {\n          __isNode: __typename\n          id\n        }\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n"
+    "text": "query SearchResultsPaginationQuery(\n  $cursor: String\n  $first: Int = 3\n  $query: String = \"\"\n) {\n  ...SearchResultsFragment_1BvpD0\n}\n\nfragment RepositoryFragment on Repository {\n  id\n  name\n  description\n  url\n  viewerHasStarred\n  stargazers {\n    totalCount\n  }\n  primaryLanguage {\n    name\n    id\n  }\n}\n\nfragment SearchResultsFragment_1BvpD0 on Query {\n  search(query: $query, type: REPOSITORY, first: $first, after: $cursor) {\n    edges {\n      node {\n        __typename\n        ...RepositoryFragment\n        ... on Node {\n          __isNode: __typename\n          id\n        }\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "c736af76bdbbe5eb3803d61a1fe49c90";
+(node as any).hash = "c7a99faa9da44f3fc4024ce3ad8770d0";
 
 export default node;

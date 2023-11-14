@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<ea5467bb310d795b3a2a1ba5112721d0>>
+ * @generated SignedSource<<8430035deafd52fdbdce1352011a456e>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -12,7 +12,6 @@ import { ConcreteRequest, Query } from 'relay-runtime';
 import { FragmentRefs } from "relay-runtime";
 export type FeedsQuery$variables = {
   cursor?: string | null | undefined;
-  query: string;
 };
 export type FeedsQuery$data = {
   readonly " $fragmentSpreads": FragmentRefs<"SearchResultsFragment">;
@@ -23,22 +22,14 @@ export type FeedsQuery = {
 };
 
 const node: ConcreteRequest = (function(){
-var v0 = {
-  "defaultValue": null,
-  "kind": "LocalArgument",
-  "name": "cursor"
-},
-v1 = {
-  "defaultValue": null,
-  "kind": "LocalArgument",
-  "name": "query"
-},
-v2 = {
-  "kind": "Variable",
-  "name": "query",
-  "variableName": "query"
-},
-v3 = [
+var v0 = [
+  {
+    "defaultValue": null,
+    "kind": "LocalArgument",
+    "name": "cursor"
+  }
+],
+v1 = [
   {
     "kind": "Variable",
     "name": "after",
@@ -49,19 +40,34 @@ v3 = [
     "name": "first",
     "value": 3
   },
-  (v2/*: any*/),
+  {
+    "kind": "Literal",
+    "name": "query",
+    "value": ""
+  },
   {
     "kind": "Literal",
     "name": "type",
     "value": "REPOSITORY"
   }
-];
+],
+v2 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "id",
+  "storageKey": null
+},
+v3 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "name",
+  "storageKey": null
+};
 return {
   "fragment": {
-    "argumentDefinitions": [
-      (v0/*: any*/),
-      (v1/*: any*/)
-    ],
+    "argumentDefinitions": (v0/*: any*/),
     "kind": "Fragment",
     "metadata": null,
     "name": "FeedsQuery",
@@ -72,8 +78,7 @@ return {
             "kind": "Variable",
             "name": "cursor",
             "variableName": "cursor"
-          },
-          (v2/*: any*/)
+          }
         ],
         "kind": "FragmentSpread",
         "name": "SearchResultsFragment"
@@ -84,16 +89,13 @@ return {
   },
   "kind": "Request",
   "operation": {
-    "argumentDefinitions": [
-      (v1/*: any*/),
-      (v0/*: any*/)
-    ],
+    "argumentDefinitions": (v0/*: any*/),
     "kind": "Operation",
     "name": "FeedsQuery",
     "selections": [
       {
         "alias": null,
-        "args": (v3/*: any*/),
+        "args": (v1/*: any*/),
         "concreteType": "SearchResultItemConnection",
         "kind": "LinkedField",
         "name": "search",
@@ -125,13 +127,8 @@ return {
                   {
                     "kind": "InlineFragment",
                     "selections": [
-                      {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "name",
-                        "storageKey": null
-                      },
+                      (v2/*: any*/),
+                      (v3/*: any*/),
                       {
                         "alias": null,
                         "args": null,
@@ -144,6 +141,13 @@ return {
                         "args": null,
                         "kind": "ScalarField",
                         "name": "url",
+                        "storageKey": null
+                      },
+                      {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "viewerHasStarred",
                         "storageKey": null
                       },
                       {
@@ -163,6 +167,19 @@ return {
                           }
                         ],
                         "storageKey": null
+                      },
+                      {
+                        "alias": null,
+                        "args": null,
+                        "concreteType": "Language",
+                        "kind": "LinkedField",
+                        "name": "primaryLanguage",
+                        "plural": false,
+                        "selections": [
+                          (v3/*: any*/),
+                          (v2/*: any*/)
+                        ],
+                        "storageKey": null
                       }
                     ],
                     "type": "Repository",
@@ -171,13 +188,7 @@ return {
                   {
                     "kind": "InlineFragment",
                     "selections": [
-                      {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "id",
-                        "storageKey": null
-                      }
+                      (v2/*: any*/)
                     ],
                     "type": "Node",
                     "abstractKey": "__isNode"
@@ -225,7 +236,7 @@ return {
       },
       {
         "alias": null,
-        "args": (v3/*: any*/),
+        "args": (v1/*: any*/),
         "filters": [
           "query",
           "type"
@@ -238,16 +249,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "75382d0910cc0a848a1b04b0c1cd2791",
+    "cacheID": "d1960a553bb53ff0887b866a6cf969eb",
     "id": null,
     "metadata": {},
     "name": "FeedsQuery",
     "operationKind": "query",
-    "text": "query FeedsQuery(\n  $query: String!\n  $cursor: String\n) {\n  ...SearchResultsFragment_1Tm6ZR\n}\n\nfragment SearchResultsFragment_1Tm6ZR on Query {\n  search(query: $query, type: REPOSITORY, first: 3, after: $cursor) {\n    edges {\n      node {\n        __typename\n        ... on Repository {\n          name\n          description\n          url\n          stargazers {\n            totalCount\n          }\n        }\n        ... on Node {\n          __isNode: __typename\n          id\n        }\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n"
+    "text": "query FeedsQuery(\n  $cursor: String\n) {\n  ...SearchResultsFragment_SneHE\n}\n\nfragment RepositoryFragment on Repository {\n  id\n  name\n  description\n  url\n  viewerHasStarred\n  stargazers {\n    totalCount\n  }\n  primaryLanguage {\n    name\n    id\n  }\n}\n\nfragment SearchResultsFragment_SneHE on Query {\n  search(query: \"\", type: REPOSITORY, first: 3, after: $cursor) {\n    edges {\n      node {\n        __typename\n        ...RepositoryFragment\n        ... on Node {\n          __isNode: __typename\n          id\n        }\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "914011b01712b6697a179ce043a4782d";
+(node as any).hash = "eeb6b5e8d622dbdb4fe8b67fe11c98ca";
 
 export default node;
