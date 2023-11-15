@@ -29,16 +29,16 @@ const SearchResultsFragment = graphql`
 `;
 
 function SearchResults({ search }: Props) {
-  const { data, refetch } = usePaginationFragment(SearchResultsFragment, search);
+  const { data, loadNext, hasNext, refetch } = usePaginationFragment(SearchResultsFragment, search);
   const [isPending, startTransition] = useTransition();
   const [searchText, setSearchText] = useState('');
 
+  const onLoadMore = () => {
+    loadNext(3);
+  };
+
   const onSearchInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchText(event.target.value);
-
-    if (event.target.value === 'error') {
-      throw new Error('error');
-    }
     startTransition(() => {
       refetch({
         query: event.target.value
@@ -53,6 +53,11 @@ function SearchResults({ search }: Props) {
         <ul className={cn('mb-3 flex flex-col gap-y-6')}>
           {data.search.edges?.map((edge, index) => <Repository key={index} repository={edge?.node!} />)}
         </ul>
+        {hasNext && (
+          <button className="mr-2 self-end rounded-md border-4 border-orange-100 px-2 py-1" onClick={onLoadMore}>
+            더 보기
+          </button>
+        )}
       </main>
     </div>
   );
