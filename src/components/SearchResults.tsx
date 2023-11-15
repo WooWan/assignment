@@ -1,6 +1,7 @@
 import { graphql } from 'babel-plugin-relay/macro';
 import { SearchResultsFragment$key } from './__generated__/SearchResultsFragment.graphql';
 import { usePaginationFragment } from 'react-relay';
+import Repository from './Repository';
 import { useState, useTransition } from 'react';
 import { cn } from '../lib/utils';
 import FeedsHeader from './FeedsHeader';
@@ -20,14 +21,7 @@ const SearchResultsFragment = graphql`
     search(query: $query, type: REPOSITORY, first: $first, after: $cursor) @connection(key: "SearchResults_search") {
       edges {
         node {
-          ... on Repository {
-            name
-            description
-            url
-            stargazers {
-              totalCount
-            }
-          }
+          ...RepositoryFragment
         }
       }
     }
@@ -42,6 +36,9 @@ function SearchResults({ search }: Props) {
   const onSearchInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchText(event.target.value);
 
+    if (event.target.value === 'error') {
+      throw new Error('error');
+    }
     startTransition(() => {
       refetch({
         query: event.target.value
@@ -54,16 +51,7 @@ function SearchResults({ search }: Props) {
       <FeedsHeader searchText={searchText} handleTextChange={onSearchInputChange} isPending={isPending} />
       <main className="flex flex-col">
         <ul className={cn('mb-3 flex flex-col gap-y-6')}>
-          {data.search.edges?.map((edge: any) => {
-            const node = edge.node;
-            return (
-              <div key={node.url}>
-                <h2>{node.name}</h2>
-                <p>{node.description}</p>
-                <p>Stars: {node.stargazers.totalCount}</p>
-              </div>
-            );
-          })}
+          {data.search.edges?.map((edge, index) => <Repository key={index} repository={edge?.node!} />)}
         </ul>
       </main>
     </div>
