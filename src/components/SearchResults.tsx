@@ -4,6 +4,7 @@ import { usePaginationFragment } from 'react-relay';
 import Repository from './Repository';
 import { useEffect, useTransition } from 'react';
 import { cn } from '../lib/utils';
+import { useDebounce } from '../utils/useDebounce';
 import LoadingSpinner from './LoadingSpinner';
 
 type Props = {
@@ -32,14 +33,15 @@ const SearchResultsFragment = graphql`
 function SearchResults({ search, query }: Props) {
   const { data, loadNext, hasNext, refetch, isLoadingNext } = usePaginationFragment(SearchResultsFragment, search);
   const [isPending, startTransition] = useTransition();
+  const debouncedText = useDebounce(query);
 
   useEffect(() => {
     startTransition(() => {
       refetch({
-        query: query
+        query: debouncedText
       });
     });
-  }, [query, refetch]);
+  }, [debouncedText, refetch]);
 
   const onLoadMore = () => {
     loadNext(3);
