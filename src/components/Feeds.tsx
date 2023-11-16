@@ -5,14 +5,24 @@ import SearchResults from './SearchResults';
 import FeedsHeader from './FeedsHeader';
 import { useState } from 'react';
 
+type Props = {
+  fetchKey: number;
+};
+
 const FeedsQuery = graphql`
   query FeedsQuery($cursor: String) {
     ...SearchResultsFragment @arguments(cursor: $cursor)
   }
 `;
 
-function Feeds() {
-  const data = useLazyLoadQuery<FeedsQueryType>(FeedsQuery, {});
+function Feeds({ fetchKey }: Props) {
+  const data = useLazyLoadQuery<FeedsQueryType>(
+    FeedsQuery,
+    {},
+    {
+      fetchKey: fetchKey
+    }
+  );
   const [searchText, setSearchText] = useState('');
 
   const onSearchInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
