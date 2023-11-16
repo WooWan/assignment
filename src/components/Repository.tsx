@@ -3,9 +3,11 @@ import { StarIcon } from 'lucide-react';
 import { useFragment, useMutation } from 'react-relay';
 import { RepositoryFragment$key } from './__generated__/RepositoryFragment.graphql';
 import type { RepositoryStarMutation as RepositoryStarMutationType } from './__generated__/RepositoryStarMutation.graphql';
+import { cn } from '../lib/utils';
 
 type Props = {
   repository: RepositoryFragment$key;
+  isPending: boolean;
 };
 
 const RepositoryFragment = graphql`
@@ -50,7 +52,7 @@ const RepositoryUnstarMutation = graphql`
   }
 `;
 
-function Repository({ repository }: Props) {
+function Repository({ repository, isPending }: Props) {
   const data = useFragment(RepositoryFragment, repository);
   const [commitMutation] = useMutation<RepositoryStarMutationType>(RepositoryStarMutation);
   const [unStarMutation] = useMutation(RepositoryUnstarMutation);
@@ -93,7 +95,11 @@ function Repository({ repository }: Props) {
   };
 
   return (
-    <li className="min-h-[100px] min-w-[320px] rounded-md bg-orange-100/[0.5] p-2">
+    <li
+      className={cn('min-h-[100px] min-w-[320px] rounded-md bg-orange-100/[0.5] p-2', {
+        'text-gray-500': isPending
+      })}
+    >
       <h3>{data.name}</h3>
       <p>{data.description}</p>
       <button
