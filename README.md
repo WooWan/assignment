@@ -2,7 +2,11 @@
 
 1. https://assignment-indol-kappa.vercel.app/ (사이트에서 바로 결과물을 확인해보세요!)
 
-2. 저장소를 clone한 뒤, `npm start`로 프로젝트를 실행합니다.
+2. 로컬에서 실행하는 방법 , `npm start`로 프로젝트를 실행합니다.
+   1. 저장소를 clone 합니다.
+   2. 프로젝트 최상단에 `.env` 파일을 생성합니다.
+   3. `.env` 파일에 REACT_APP_GITHUB_AUTH_TOKEN=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를 추가합니다.
+   4. `npm start`로 프로젝트를 실행합니다.
 
 ## 🔥 과제에 대한 설명
 
@@ -29,7 +33,7 @@
 - transition을 사용하여 검색 결과를 `refetch`할 때 ui blocking을 없앴습니다.
 
 - 유저에게 검색 결과 데이터를 받아오고 있다는 것을 알려주기 위해서, transition이 일어나고 있을 경우, 컨텐츠들이 회색으로 표현됩니다.
-  
+
 
 
   <img src='public/image.png' width='300'>
