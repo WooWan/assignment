@@ -29,9 +29,15 @@
 - transition을 사용하여 검색 결과를 `refetch`할 때 ui blocking을 없앴습니다.
 
 - 유저에게 검색 결과 데이터를 받아오고 있다는 것을 알려주기 위해서, transition이 일어나고 있을 경우, 컨텐츠들이 회색으로 표현됩니다.
+  
+
+  
   <img src='image.png' width='300'>
 
 - 더 보기 버튼을 클릭할 시에, 로딩스피너가 추가됩니다.
+
+
+
   <img src='image-1.png' width='300'/>
 
 - 검색 중에 에러가 발생한 경우, 에러 메세지와 retry 버튼을 보여줍니다.
