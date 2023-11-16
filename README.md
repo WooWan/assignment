@@ -1,46 +1,40 @@
-# Getting Started with Create React App
+## 과제 실행 방법
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+1. https://assignment-indol-kappa.vercel.app/ (사이트에서 바로 결과물을 확인해보세요!)
 
-## Available Scripts
+2. 저장소를 clone한 뒤, `npm start`로 프로젝트를 실행합니다.
 
-In the project directory, you can run:
+## 🔥 과제에 대한 설명
 
-### `npm start`
+#### 과제에서 느낀 점
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- graphql과 relay를 처음 사용해보면서 러닝 커브가 낮지 않았지만, query와 fragment를 기반으로 타입과 결합되어있다는 점과, relay compiler의 사전 에러 방지가 매력적이라고 생각이 들었습니다.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- 컴포넌트와 데이터 로직을 한 곳에 작성하여 규모가 큰 프로젝트에서 유용하게 사용할 수 있을 거라 생각합니다.
 
-### `npm test`
+- 이번 과제에서는 lazyLoad를 사용하였지만, preloadQuery를 사용하면 component 렌더링 이전에 데이터를 미리 요청할 수 있다는 점이 다른 라이브러리와 비교했을 때 장점이라고 생각이 들었습니다.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+#### 구현 요구사항
 
-### `npm run build`
+- [x] Query.search 필드 리졸버를 이용한 레포지토리 검색
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- [x] `input` 폼을 이용한 검색
+- [x] 검색 결과 페이지네이션(cursor based pagination)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- [x] 아래 Mutation을 이용하여 검색된 레포지토리에 스타 추가/제거 토글 버튼
+  - optimistic UI를 이용하여 즉시 반영되도록 만들었습니다.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+##### 과제에는 없지만 추가 구현한 기능들
 
-### `npm run eject`
+- transition을 사용하여 검색 결과를 `refetch`할 때 ui blocking을 없앴습니다.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- 유저에게 검색 결과 데이터를 받아오고 있다는 것을 알려주기 위해서, transition이 일어나고 있을 경우, 컨텐츠들이 회색으로 표현됩니다.
+  <img src='image.png' width='300'>
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- 더 보기 버튼을 클릭할 시에, 로딩스피너가 추가됩니다.
+  <img src='image-1.png' width='300'/>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- 검색 중에 에러가 발생한 경우, 에러 메세지와 retry 버튼을 보여줍니다.
+  - `REACT_APP_GITHUB_AUTH_TOKEN` 환경변수를 변경하여 error ui를 확인할 수 있습니다.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+<img src='image-2.png' width='500'>
