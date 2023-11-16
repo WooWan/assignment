@@ -15,13 +15,9 @@ const RepositoryFragment = graphql`
     id
     name
     description
-    url
     viewerHasStarred
     stargazers {
       totalCount
-    }
-    primaryLanguage {
-      name
     }
   }
 `;
